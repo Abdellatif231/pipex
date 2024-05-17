@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:29:41 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 14:54:12 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:08:18 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	first_cmd(t_va *va, char *av[], int ac, char *ev[])
 	dup2(va->infd, STDIN_FILENO);
 	dup2(va->fd[1], STDOUT_FILENO);
 	ft_close(va);
-	//	check_leaks();
 	if (execve(va->pathname, va->cmd, ev) == 1)
 	{
 		free_split(va->cmd);
@@ -49,7 +48,6 @@ int	second_cmd(t_va *va, char *av[], int ac, char *ev[])
 	dup2(va->outfd, STDOUT_FILENO);
 	dup2(va->fd[0], STDIN_FILENO);
 	ft_close(va);
-	//	check_leaks();
 	if (execve(va->pathname, va->cmd, ev) == 1)
 	{
 		free_split(va->cmd);
@@ -90,7 +88,5 @@ int	main(int ac, char *av[], char *ev[])
 	if (va.pid2 == 0)
 		return (second_cmd(&va, av, ac, ev));
 	parent(&va);
-	//	system("leaks -q pipex");
-	check_leaks();
 	return (0);
 }

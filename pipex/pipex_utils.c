@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:58:53 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 17:15:04 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:35:10 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	here_doc(t_va *va_l, char *limiter)
 		ft_printf("> ");
 		line = get_next_line(0);
 		if (!line)
-			break;
+			break ;
 		if (!*limiter && *line == '\n')
 			break ;
 		if (ft_strlen(limiter) == ft_strlen(line) - 1 && !ft_strncmp(limiter,
@@ -72,29 +72,14 @@ void	here_doc(t_va *va_l, char *limiter)
 	}
 	free(line);
 	close(pfd[1]);
-	ft_printf("%p\n", line);
 }
 
-char	*find_path(char *ev[])
+int	ft_close(t_va *va)
 {
-	char	*path;
-
-	while (*ev)
-	{
-		path = ft_strnstr(*ev, "PATH=", 5);
-		if (path)
-			return (path);
-		ev++;
-	}
-	return (NULL);
-}
-
-int ft_close(t_va *va)
-{
-    close(va->prv_fd);
-    close(va->fd[0]);
-    close(va->fd[1]);
-    close(va->infd);
-    close(va->outfd);
-    return 1;
+	close(va->prv_fd);
+	close(va->fd[0]);
+	close(va->fd[1]);
+	close(va->infd);
+	close(va->outfd);
+	return (1);
 }

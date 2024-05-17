@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <amaaouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 20:39:22 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 18:49:17 by amaaouni         ###   ########.fr       */
+/*   Created: 2024/01/17 10:35:58 by amaaouni          #+#    #+#             */
+/*   Updated: 2024/01/17 16:49:23 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int	ft_puthex(unsigned int n, char *base)
 {
-	unsigned int	i;
+	int	count;
 
-	if (!s || !f)
-		return ;
-	i = 0;
-	while (s[i])
+	count = 0;
+	if (n < 16)
+		count += ft_putchar(base[n]);
+	else
 	{
-		f(i, &s[i]);
-		i++;
+		count += ft_puthex(n / 16, base);
+		count += ft_puthex(n % 16, base);
 	}
+	return (count);
 }

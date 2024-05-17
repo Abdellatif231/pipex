@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <amaaouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 20:39:22 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 18:49:17 by amaaouni         ###   ########.fr       */
+/*   Created: 2024/01/17 16:10:19 by amaaouni          #+#    #+#             */
+/*   Updated: 2024/01/18 21:43:09 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int	ft_putstr(char *s)
 {
-	unsigned int	i;
+	int	count;
 
-	if (!s || !f)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		f(i, &s[i]);
-		i++;
-	}
+	count = 0;
+	if (!s)
+		count += write(1, "(null)", 6);
+	while (s && s[count])
+		count += write(1, &s[count], 1);
+	return (count);
 }

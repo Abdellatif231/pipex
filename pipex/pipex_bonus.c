@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 13:07:26 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 17:18:55 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:55:24 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -43,7 +43,7 @@ int	execute_cmd(t_va *va_l, int ac, char *av[], char *ev[])
 	va_l->cmd = final_split(av[va_l->i], ' ');
 	va_l->pathname = check_path(va_l->cmd[0], ev);
 	if (va_l->pathname == NULL)
-		return free_split(va_l->cmd);
+		return (free_split(va_l->cmd));
 	execve(va_l->pathname, va_l->cmd, ev);
 	return (1);
 }
@@ -58,7 +58,10 @@ int	create_process(t_va *va_l, int ac, char *av[], char *ev[])
 	if (va_l->pid == 0)
 	{
 		if (execute_cmd(va_l, ac, av, ev) == 1)
+		{
+			perror("execve");
 			return (1);
+		}
 	}
 	close(va_l->prv_fd);
 	va_l->prv_fd = dup(va_l->fd[0]);
@@ -91,8 +94,5 @@ int	main(int ac, char *av[], char *ev[])
 	ft_close(&va_l);
 	while (wait(NULL) > 0)
 		;
-	check_leaks();
-	system("leaks -q pipex");
-	while (1);
 	return (0);
 }

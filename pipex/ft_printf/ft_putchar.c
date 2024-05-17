@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaaouni <amaaouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 20:39:22 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 18:49:17 by amaaouni         ###   ########.fr       */
+/*   Created: 2024/01/17 10:43:55 by amaaouni          #+#    #+#             */
+/*   Updated: 2024/01/19 15:31:10 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int	ft_putchar(char c)
 {
-	unsigned int	i;
-
-	if (!s || !f)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		f(i, &s[i]);
-		i++;
-	}
+	write(1, &c, 1);
+	return (1);
 }

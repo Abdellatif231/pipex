@@ -6,7 +6,7 @@
 /*   By: amaaouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:21:38 by amaaouni          #+#    #+#             */
-/*   Updated: 2024/05/15 13:16:32 by amaaouni         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:38:41 by amaaouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PIPEX_H
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
-# include "printf/ft_printf.h"
+# include "ft_printf/ft_printf.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/wait.h>
@@ -44,6 +44,14 @@ typedef struct t_split
 	int		count;
 }			t_par;
 
+typedef struct t_check_path
+{
+	char	*path;
+	char	*pathname;
+	char	**env_paths;
+	char	**env_to_free;
+}			t_path;
+
 char		**d_free(char **ary, int index);
 char		**split_command(char const *s, char c);
 int			open_files(t_va *va_l, char *av[], int ac);
@@ -54,7 +62,6 @@ char		*check_path(char *cmd, char *ev[]);
 void		here_doc(t_va *va_l, char *limiter);
 char		**final_split(char *str, char c);
 int			ft_close(t_va *va);
-int free_split(char **arr);
+int			free_split(char **arr);
 
-void check_leaks();
 #endif
